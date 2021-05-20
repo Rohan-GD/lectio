@@ -1,5 +1,6 @@
 import tweepy
 from dotenv import load_dotenv
+from fpdf import FPDF
 
 import os
 
@@ -111,8 +112,48 @@ def printAllTweet(tweets):
             print("")
     else:
         print("No Tweet to print")
+def generate_list(tweets):
+    a = []
+    if len(tweets)>0:
+        print("Thread Messages include:-")
+        for tweetId in range(len(tweets)):
+            a.append(str(tweetId+1)+". "+tweets[tweetId].full_text)
+    return a
+
+# def check_emojis(elts):
+#     for elt in elts:
+#         for c in elt:
+#             try:
+#                 c = c.decode('utf-8')
+#             except UnicodeDecodeError:
+#                 pass
+#     return NameObject(c)
+#     return elts
+# def list_to_str(l):
+  
+#     # using list comprehension
+#     listToStr = ' '.join(map(str, l))
+  
+#     return listToStr
+def generate_pdf(elts):
+    pdf = FPDF()
+    # Add a page
+    pdf.add_page()
+    # set style and size of font 
+    # that you want in the pdf
+    pdf.set_font("Arial", size = 10)
+    i =1
+    for elt in elts:
+        pdf.cell(200, 10, txt = elt,ln = i, align = 'C')
+        i +=1
+    # save the pdf with name .pdf
+    pdf.output("tweets.pdf")   
+
 
 if __name__ == '__main__':
-  tweetId = '1393971490912014340'
+  tweetId = '1393545179479511042' #'1393971490912014340'
   allTweets = getAllTweetsInThread(tweetId)
   printAllTweet(allTweets)
+  list_of_elts = generate_list(allTweets)
+  print(list_of_elts)
+  generate_pdf(list_of_elts)
