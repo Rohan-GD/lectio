@@ -1,8 +1,7 @@
 import tweepy
-from dotenv import load_dotenv
-from fpdf import FPDF
-
 import os
+import time
+from dotenv import load_dotenv
 
 load_dotenv()
 CONSUMER_KEY = os.getenv('CONSUMER_KEY')
@@ -13,30 +12,10 @@ ACCESS_TOKEN_SECRET = os.getenv('ACCESS_TOKEN_SECRET')
 auth = tweepy.OAuthHandler(CONSUMER_KEY,CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN,ACCESS_TOKEN_SECRET)
 
-api = tweepy.API(auth)
+api = tweepy.API(auth,wait_on_rate_limit=True)##the object api in a way communicates with twitter being able to read from and write to it
 
-search_words = "israel"+" -filter:retweets"
-date_since = "2021-3-1"
-# Collect tweets
-# tweets = tweepy.Cursor(api.search,
-#               q=search_words,
-#               lang="en",
-#               since=date_since).items(5)
+##REMEMBER TO MAKE CHANGES IF REQIRED TO THE TEXT FILE BEFORE RUNNING
 
-# Iterate and print tweets
-#print([tweet.text for tweet in tweets])
-# user_loc = [[tweet.user.screen_name,tweet.user.location] for tweet in tweets]
-# print(user_loc)
-# tweet_text = pd.DataFrame(data = user_loc, columns=["user","location"])
-# print(tweet_text)
-# user = api.get_user('twitter')
-# print(user.screen_name)
-# print(user.followers_count)
-# for friend in user.friends():
-#    print(friend.screen_name)
-# public_tweets = api.home_timeline()
-# for tweet in public_tweets:
-#     print(tweet.text)
 
 def get_all_tweets(tweet):
     screen_name = tweet.user.screen_name
@@ -90,7 +69,7 @@ def getAllTweetsInThreadBeforeThis(tweetId):
     thread = []
     hasReply = True
     res = api.get_status(tweetId, tweet_mode='extended')
-    while res.in_reply_to_status_id is not None:
+    while res.in_reply_to_status_id is not None:##as long as the thread doesnt end
         res = api.get_status(res.in_reply_to_status_id, tweet_mode='extended')
         thread.append(res)
     return thread[::-1]
@@ -112,48 +91,72 @@ def printAllTweet(tweets):
             print("")
     else:
         print("No Tweet to print")
-def generate_list(tweets):
-    a = []
-    if len(tweets)>0:
-        print("Thread Messages include:-")
-        for tweetId in range(len(tweets)):
-            a.append(str(tweetId+1)+". "+tweets[tweetId].full_text)
-    return a
 
-# def check_emojis(elts):
-#     for elt in elts:
-#         for c in elt:
-#             try:
-#                 c = c.decode('utf-8')
-#             except UnicodeDecodeError:
-#                 pass
-#     return NameObject(c)
-#     return elts
-# def list_to_str(l):
+def dm(tweets,sname):##DM function
+  if len(tweets)>0:
+    print("DMing..")
+    message=""
+    ##message = message + sname.author.name + "\n" ##tweets from
+    u=api.get_user(sname.user.screen_name)##fetching the user tag name
+    for t in range(len(tweets)):
+      message= message+ str(t+1)+". "+tweets[t].full_text +"\n"
+      
+    api.send_direct_message(recipient_id=u.id_str,text=message)##everything in 1 mssg
+  else:
+    print("Nothing to dm")
+
+
+def retrieve():##reads from txt
+
+  f=open("id.txt","r")
+  last=int(f.read().strip())
+  f.close()
+  return last
+
+def store(lt):##writes on txt
+
+  q=open("id.txt","w")
+  q.write(str(lt))
+  q.close()
   
-#     # using list comprehension
-#     listToStr = ' '.join(map(str, l))
+while True:##start of main loop
+  l=retrieve()
   
-#     return listToStr
-def generate_pdf(elts):
-    pdf = FPDF()
-    # Add a page
-    pdf.add_page()
-    # set style and size of font 
-    # that you want in the pdf
-    pdf.set_font("Arial", size = 10)
-    i =1
-    for elt in elts:
-        pdf.cell(200, 10, txt = elt,ln = i, align = 'C')
-        i +=1
-    # save the pdf with name .pdf
-    pdf.output("tweets.pdf")   
+  mentions=api.mentions_timeline(l,tweet_mode="extended",count=200)##testing
+  if len(mentions)>0:##looking for mentions
+    
+    mentions=mentions[::-1]##respond to older tweets first
+    for m in mentions:
+      ##print(len(mentions),type(mentions),vars(m))
+      h=m.full_text.lower()
+      check=h.find("unroll")##looking for keyword
+      if check>0:
+        print("Responding...")
+        store(m.id)
+        ##calling necessary functions
+
+        if __name__ == '__main__':
+          
+          myTweetId = str(m.in_reply_to_status_id)
+          ##the difference maker right here
+          
+          allTweets = getAllTweetsInThread(myTweetId)
+          printAllTweet(allTweets)
+          ##time.sleep(15)
+          dm(allTweets,m)##additional parameter?
+          
+        ## api.send_direct_message(recipient_id=mentions[0].id,text=allTweets)##other parameters are attachment type and media
+
+  else:
+    time.sleep(15)
+    continue
+
+  
+
+  
 
 
-if __name__ == '__main__':
-  tweetId = '1393545179479511042' #'1393971490912014340'
-  allTweets = getAllTweetsInThread(tweetId)
-  printAllTweet(allTweets)
-  list_of_elts = generate_list(allTweets)
-  print(list_of_elts)
-  generate_pdf(list_of_elts)
+  
+
+
+
