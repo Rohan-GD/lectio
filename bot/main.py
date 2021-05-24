@@ -136,16 +136,28 @@ while True:##start of main loop
         ##calling necessary functions
 
         if __name__ == '__main__':
-          
+
+          j=m.in_reply_to_status_id
           myTweetId = str(m.in_reply_to_status_id)
           ##the difference maker right here
           
-          allTweets = getAllTweetsInThread(myTweetId)
-          printAllTweet(allTweets)
-          ##time.sleep(15)
-          dm(allTweets,m)##additional parameter?
+          if j != None:
+            ##if the bot is simply called instead of being tagged as a reply to a thread
+
           
-        ## api.send_direct_message(recipient_id=mentions[0].id,text=allTweets)##other parameters are attachment type and media
+            
+            allTweets = getAllTweetsInThread(TweetId)
+            printAllTweet(allTweets)
+            ##time.sleep(15)
+            dm(allTweets,m)##additional parameter?
+            
+          ## api.send_direct_message(recipient_id=mentions[0].id,text=allTweets)##other parameters are attachment type and media
+          else:
+            o=api.get_user(m.user.screen_name)
+            
+            
+            api.send_direct_message(recipient_id=o.id_str,text="Please choose a thread and try again.\nFor instructions check out my bio")##everything in 1 mssg
+            time.sleep(5)
 
   else:
     time.sleep(15)
