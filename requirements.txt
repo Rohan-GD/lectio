@@ -1,0 +1,7 @@
+
+
+
+python_dotenv == 0.17.1
+
+
+tweepy == 3.10.0
