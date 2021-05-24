@@ -28,5 +28,12 @@ Make sure you have the latest python installed
 git clone <repo url>
 
 ```
+Inside the project directory, install the modules used
+```
+pip install tweepy
+```
+```
+pip install pip install python-dotenv
+```
 ## How to Run
 Instructions for running
