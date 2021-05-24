@@ -2,7 +2,9 @@
 # Lectio bot
 This is a twitter bot account (@lectiobot).Follow this account on twitter, then go to any thread in twitter 
 and tweet a comment tagging this bot.     In a few moments, the bot will send you a dm with the contents from
-the thread.
+the thread. The bot is written completely with Python. We created a seperate account to act as the bot
+and hosted it in replit as it is possible to continuously run the program with the hacker plan in replit.
+
 ## Team members
 1. Sidharth R [https://github.com/Raf5017]
 2. S Sandeep [https://github.com/Sandeep-2060]
@@ -10,7 +12,7 @@ the thread.
 ## Team ID
 BFH/rec7Ia3d8sff3ZODq/2021
 ## Link to product walkthrough
-[link to video]
+[https://www.loom.com/share/fd34615524404fc8aa0fe13dfb6484b4]
 ## How it Works ?
 1. First follow the account @lectiobot ( [https://twitter.com/lectiobot] )
 2. Go to any recent thread on twitter 
