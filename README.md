@@ -33,7 +33,21 @@ Inside the project directory, install the modules used
 pip install tweepy
 ```
 ```
-pip install pip install python-dotenv
+pip install python-dotenv
 ```
+Now before proceeding further you will have to make a new app at [https://developer.twitter.com/apps]
+If you do not have a twitter dev account, apply for the same and then make a new app
+1. Sign in with your Twitter account
+2. Create a new app account
+3. Modify the settings for that app account to allow read & write
+4. Generate new consumer key and access token with those permissions
+
+Following these steps will create 4 tokens that you will need to place in the .env_sample file.
+Then rename the file as .env
+
 ## How to Run
-Instructions for running
+Now in the terminal run
+```
+python main.py
+```
+
