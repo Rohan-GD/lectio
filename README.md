@@ -12,13 +12,21 @@ BFH/rec7Ia3d8sff3ZODq/2021
 ## Link to product walkthrough
 [link to video]
 ## How it Works ?
-1. 
-2. Step 2
+1. First follow the account @lectiobot ( [https://twitter.com/lectiobot] )
+2. Go to any recent thread on twitter 
+3. Tag the bot and type : "@lectiobot unroll"
+4. After a few moments, the bot will send you a dm with the thread
 ## Libraries used
 Python - 3.8.5
 tweepy - 3.10.0
 dotenv - 0.17.1
 ## How to configure
-Instructions for setting up project
+
+# Setup and Installation
+Make sure you have the latest python installed
+```
+git clone <repo url>
+
+```
 ## How to Run
 Instructions for running
