@@ -50,4 +50,4 @@ Now in the terminal run
 ```
 python main.py
 ```
-
+Now the bot is active
