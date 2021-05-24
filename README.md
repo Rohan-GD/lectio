@@ -2,17 +2,20 @@
 # Project Name
 Long Description about project. This project do that. This project is awesome...
 ## Team members
-1. Name [Embed personal github URL]
-2. S Sandeep [https://github.com/Sandeep-2060Embed perosnal]
-## Team Id
-Team id here
+1. Sidharth R [https://github.com/Raf5017]
+2. S Sandeep [https://github.com/Sandeep-2060]
+3. Rohan George D [https://github.com/Rohan-GD]
+## Team ID
+BFH/rec7Ia3d8sff3ZODq/2021
 ## Link to product walkthrough
 [link to video]
 ## How it Works ?
-1. Step 1
+1. 
 2. Step 2
 ## Libraries used
-Library Name - Version
+Python - 3.8.5
+tweepy - 3.10.0
+dotenv - 0.17.1
 ## How to configure
 Instructions for setting up project
 ## How to Run
