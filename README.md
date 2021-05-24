@@ -24,7 +24,7 @@ tweepy - 3.10.0
 dotenv - 0.17.1
 ## How to configure
 
-# Setup and Installation
+### Setup and Installation
 Make sure you have the latest python installed
 ```
 git clone <repo url>
