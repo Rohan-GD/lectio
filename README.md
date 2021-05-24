@@ -10,7 +10,7 @@ BFH/rec7Ia3d8sff3ZODq/2021
 ## Link to product walkthrough
 [link to video]
 ## How it Works ?
-1. Step 1
+1. 
 2. Step 2
 ## Libraries used
 Python - 3.8.5
