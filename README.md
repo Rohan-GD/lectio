@@ -1,7 +1,7 @@
 ![BFH Banner](https://trello-attachments.s3.amazonaws.com/542e9c6316504d5797afbfb9/542e9c6316504d5797afbfc1/39dee8d993841943b5723510ce663233/Frame_19.png)
 # Lectio bot
 This is a twitter bot account (@lectiobot).Follow this account on twitter, then go to any thread in twitter 
-and tweet a comment tagging this bot. In a few moments, the bot will send you a dm with the contents from
+and tweet a comment tagging this bot.     In a few moments, the bot will send you a dm with the contents from
 the thread.
 ## Team members
 1. Sidharth R [https://github.com/Raf5017]
