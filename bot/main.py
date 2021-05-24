@@ -138,7 +138,7 @@ while True:##start of main loop
         if __name__ == '__main__':
 
           j=m.in_reply_to_status_id
-          myTweetId = str(m.in_reply_to_status_id)
+          TweetId = str(m.in_reply_to_status_id)
           ##the difference maker right here
           
           if j != None:
